@@ -15,8 +15,8 @@ const routes: Routes = [
     //canLoad: [IntroGuard, AutoLoginGuard] // Check if we should show the introduction or forward to inside
   },
   {
-    path: 'Admin',
-    loadChildren: () => import('./admin/admin.module').then( m => m.AdminPageModule),
+    path: 'Admin/:id',
+    loadChildren: () => import('./Admin/admin.module').then( m => m.AdminPageModule),
   },
   {
     path: 'intro',

@@ -14,7 +14,7 @@ export class AppComponent {
     { title: 'Insured Accounts', url: '/Insured/insured', icon: 'people-circle' },
     { title: 'New Policy', url: '/NewPolicy/newpolicy', icon: 'person' },
     { title: 'UW Approval', url: '/folder/UWApproval', icon: 'checkmark' },
-    { title: 'Administration', url: '/Admin', icon: 'cog' },
+    { title: 'Administration', url: '/Admin/admin', icon: 'cog' },
     { title: 'Contact Support', url: '/folder/Support', icon: 'people' },
   ];
   public newPolicy = false;
