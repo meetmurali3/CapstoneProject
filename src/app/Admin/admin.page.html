@@ -1,0 +1,62 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>{{title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{title}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <h3 class="no-item" text-center *ngIf="uwUsers.length===0">
+    No Underwriters
+  </h3>
+  <ion-list>
+    <ion-item>
+      <ion-label>First Name</ion-label>
+      <ion-label>Last Name</ion-label>
+      <ion-label>User Name</ion-label>
+    </ion-item>
+       <ion-item-sliding  *ngFor="let uw of uwUsers; let i = index">
+      <ion-item>
+        <ion-label>{{uw.firstName}}</ion-label>
+        <ion-label>{{uw.lastName}}</ion-label>
+        <ion-label>{{uw.userName}}</ion-label>
+      </ion-item>
+      <ion-item-options>
+        <ion-button (click)="editItem(uw, i)" color="primary" icon-start>
+          <ion-icon name="create"></ion-icon>
+          Edit
+        </ion-button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+<br><br><br><br><br>
+  <h3 class="no-item" text-center *ngIf="uwAssists.length===0">
+    No UW assitants
+  </h3>
+  <ion-list>
+    <ion-item>
+      <ion-label>First Name</ion-label>
+      <ion-label>Last Name</ion-label>
+      <ion-label>User Name</ion-label>
+    </ion-item>
+    
+    <ion-item-sliding  *ngFor="let uwa of uwAssists; let i = index">
+      <ion-item>
+        <ion-label>{{uwa.firstName}}</ion-label>
+        <ion-label>{{uwa.lastName}}</ion-label>
+        <ion-label>{{uwa.userName}}</ion-label>
+      </ion-item>
+      <ion-item-options>
+        <ion-button (click)="editItem(uwa, i)" color="primary" icon-start>
+          <ion-icon name="create"></ion-icon>
+          Edit
+        </ion-button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

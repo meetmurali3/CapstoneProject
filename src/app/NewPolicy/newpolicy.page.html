@@ -1,0 +1,80 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>New Policy</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header>Basic Policy Information</ion-header>
+<ion-content>
+  <form [formGroup]="newPolicyForm" (ngSubmit)="submitForm()" novalidate>
+    <ion-item>
+      <ion-label>Insured account (please select the insured)</ion-label>
+      <ion-select formControlName="insuredAccount">
+        <ion-select-option *ngFor="let ins of insureds" value="{{ins.id}}">{{ins.firstName + ' ' + ins.lastName}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Policy Number</ion-label>
+      <ion-input formControlName="policyNumber" readonly></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Policy Start Date</ion-label>
+      <ion-datetime formControlName="policyStart" displayFormat="MM DD YYYY" placeholder="Select Date"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Policy End Date</ion-label>
+      <ion-datetime formControlName="policyEnd" displayFormat="MM DD YYYY" placeholder="Select Date"></ion-datetime>
+    </ion-item>
+    <br><br><br>
+    <ion-header>Vehicle Information</ion-header>
+    <ion-item>
+      <ion-label position="floating">Year</ion-label>
+      <ion-input formControlName="year" displayFormat="YYYY" min="1900" max="2022"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">Make</ion-label>
+      <ion-input formControlName="make" type="text" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">Model</ion-label>
+      <ion-input formControlName="model" type="text" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">Mileage</ion-label>
+      <ion-input formControlName="mileage" type="text" required></ion-input>
+    </ion-item>
+
+
+    <br><br><br>
+    <ion-header>Coverage Information</ion-header>
+    <ion-item><ion-label position="fixed">Bodily Injury Coverage        </ion-label>
+    <ion-checkbox formControlName="bodilyInjuryCovInd"  color="primary"></ion-checkbox></ion-item>
+    <ion-item><ion-label position="fixed">Property Damage Coverage        </ion-label>
+    <ion-checkbox formControlName="propertyDmgCovInd"  color="primary"></ion-checkbox></ion-item>
+    <ion-item><ion-label position="fixed">Medical Payments Coverage        </ion-label>
+    <ion-checkbox formControlName="medPayCovInd"  color="primary"></ion-checkbox></ion-item>
+    <ion-item><ion-label position="fixed">Collision Coverage        </ion-label>
+    <ion-checkbox formControlName="collisionCovInd"  color="primary"></ion-checkbox></ion-item>
+    <ion-item><ion-label position="fixed">Uninsured Motorist Coverage        </ion-label>
+    <ion-checkbox formControlName="unCovInd"  color="primary"></ion-checkbox></ion-item>
+    <ion-item><ion-label position="fixed">Underinsured Motorist Coverage        </ion-label>
+    <ion-checkbox formControlName="underInsCovInd"  color="primary"></ion-checkbox></ion-item>
+
+    <br><br><br>
+    <ion-header>Quote and Issue</ion-header>
+    <ion-item>
+      <ion-label position="fixed">Enter the premium</ion-label>
+      <ion-input formControlName="premium" type="text" required></ion-input>
+    </ion-item>
+    <ion-item><ion-label position="fixed">Do you want to refer this policy to Underwriter?</ion-label>
+      <ion-checkbox formControlName="requireUWApprovalInd"  color="primary"></ion-checkbox>
+    </ion-item>
+    <ion-button type="cancel" color="dark" (click)="this.router.navigate(['/Home/home'])">Cancel</ion-button>
+    <ion-button type="submit" color="dark">Issue</ion-button>
+
+  </form>
+</ion-content>

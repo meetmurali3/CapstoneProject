@@ -1,0 +1,7 @@
+{
+  "name": "InsSimplified",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
