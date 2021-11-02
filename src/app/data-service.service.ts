@@ -23,6 +23,7 @@ export class DataServiceService {
   login: any;
   dataChanged$: Observable<boolean>;
   private dataChangeSubject: Subject<boolean>;
+  //baseURL = 'https://afternoon-reef-59110.herokuapp.com';
   baseURL = 'http://localhost:3000';
 
 
@@ -41,6 +42,24 @@ export class DataServiceService {
 
   getUWAssits(): Observable<any> {
     return this.httpClient.get(this.baseURL + '/api/uwausers').pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+
+  getPoliciesOfUser(uid): Observable<any> {
+    return this.httpClient.get(this.baseURL + '/api/policy/' + uid).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+
+  getInsuredOfPolicy(accID): Observable<any> {
+    return this.httpClient.get(this.baseURL + '/api/insured/' + accID).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+
+  getUWReferedPolicies(): Observable<any> {
+    return this.httpClient.get(this.baseURL + '/api/uwapproval').pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
@@ -66,25 +85,17 @@ export class DataServiceService {
   addPolicy(policy) {
     this.httpClient.post(this.baseURL + '/api/newpolicy', policy).subscribe(res => {
       this.policy = res;
-    }
-    );
-  }
-
-  //Insured Account
-  editInsured(insured) {
-    return this.httpClient.put(this.baseURL + '/api/insuredinfo/' + insured.id, insured).subscribe(res => {
-      this.insuredAcc = res;
       this.dataChangeSubject.next(true);
     }
     );
-
   }
 
-
-  getInsuredWithName(name): Observable<any> {
-    return this.httpClient.get(this.baseURL + '/api/insuredwithname/' + name).pipe(
-      map(this.extractData),
-      catchError(this.handleError));
+  setUWDecision(policy) {
+    this.httpClient.patch(this.baseURL + '/api/uwapproval', policy).subscribe(res => {
+      this.policy = res;
+      this.dataChangeSubject.next(true);
+    }
+    );
   }
 
   //Insured Account
@@ -100,7 +111,6 @@ export class DataServiceService {
       map(this.extractData),
       catchError(this.handleError));
   }
-
 
   private extractData(res: Response) {
     let body = res;
@@ -119,26 +129,12 @@ export class DataServiceService {
     return Observable.throw(errMsg);
   }
 
-  // remove items
-  removeItem(item) {
-    console.log("Remove Item - id = ", item._id);
-    this.httpClient.delete(this.baseURL + '/api/users/remove/' + item._id).subscribe(res => {
-      this.users = res;
-      this.dataChangeSubject.next(true);
-    });
-  }
-
-  editItem(item, id) {
-    console.log("updating item ", item._id);
-    this.httpClient.put(this.baseURL + '/api/users/' + item._id, item).subscribe(res => {
-      this.users = res;
-      this.dataChangeSubject.next(true);
-    }
-    );
-  }
 
   addUser(user) {
-    this.httpClient.post(this.baseURL + '/api/user', user);
+    this.httpClient.post(this.baseURL + '/api/user', user).subscribe(res => {
+      this.policy = res;
+      this.dataChangeSubject.next(true);
+    });
   }
 
 }

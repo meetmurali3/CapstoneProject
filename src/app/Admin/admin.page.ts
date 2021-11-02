@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataServiceService } from '../data-service.service';
 import { NavController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-folder',
   templateUrl: './admin.page.html',
-  styleUrls: ['../folder/folder.page.scss'],
+  styleUrls: ['./admin.page.scss'],
 })
 export class AdminPage implements OnInit {
   users = [];
@@ -24,7 +23,8 @@ export class AdminPage implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, public navCtrl: NavController, 
               public toastCtrl: ToastController, 
               public alertCtrl: AlertController,
-              public dataService: DataServiceService) { 
+              public dataService: DataServiceService,
+              public router: Router) { 
     this.getUsers();
     this.getUnderwriterUsers();
     this.getUWAsstUsers();

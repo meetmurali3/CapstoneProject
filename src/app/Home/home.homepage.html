@@ -1,22 +1,44 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>{{ folder }}</ion-title>
+    <ion-title>Home</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <!--<ion-title size="large">{{ folder }}</ion-title>-->
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-margin">
+  <ion-grid class="ion-margin">
+    <ion-row>
+      <ion-col>Policy Number</ion-col>
+      <ion-col>Insured</ion-col>
+      <ion-col>Start Date</ion-col>
+      <ion-col>Expires on</ion-col>
+      <ion-col>Vehicle</ion-col>
+      <ion-col>ID Card</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let pol of policies; let i = index">
+      <ion-col>{{pol.policyNumber}}</ion-col>
+      <ion-col>{{fullName(map.get(pol.policyNumber))}}</ion-col>
+      <ion-col>{{pol.policyStart.toString().substring(0, 10)}}</ion-col>
+      <ion-col>{{pol.policyEnd.toString().substring(0, 10)}}</ion-col>
+      <ion-col>{{getVehDetails(pol)}}</ion-col>
+      <ion-col>
+        <ion-button color="primary" (click)="createPDF(pol, map.get(pol.policyNumber))">
+          <ion-label>Policy doc</ion-label>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-  <div id="container">
-    <strong class="capitalize">{{ folder }}</strong>
-    <p>Home Page by Murali</p>
-  </div>
-  
+  <!--ion-button (click)="sendIDCard(pol)">
+            <ion-icon  slot="end" expand="block"></ion-icon>
+            <ion-label>Send ID Card</ion-label>
+          </ion-button>
+          <ion-button (click)="createPDF(pol, map.get(pol.policyNumber))">
+            <ion-icon  slot="end" expand="block"></ion-icon>
+            <ion-label>create PDF</ion-label>
+          </ion-button-->
+
+
 </ion-content>

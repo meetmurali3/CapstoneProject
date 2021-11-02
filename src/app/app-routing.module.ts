@@ -12,11 +12,14 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
-    //canLoad: [IntroGuard, AutoLoginGuard] // Check if we should show the introduction or forward to inside
   },
   {
     path: 'Admin/:id',
     loadChildren: () => import('./Admin/admin.module').then( m => m.AdminPageModule),
+  },
+  {
+    path: 'User/:id',
+    loadChildren: () => import('./User/createuser.module').then( m => m.CreateUserPageModule),
   },
   {
     path: 'intro',
@@ -37,7 +40,11 @@ const routes: Routes = [
   {
     path: 'Home/:id',
     loadChildren: () => import('./Home/home.module').then( m => m.HomePageModule),
-  }, 
+  },
+  {
+    path: 'UWApproval',
+    loadChildren: () => import('./UWApproval/uw.module').then( m => m.UWPageModule),
+  },  
   {
     path: 'Insured/:id',
     loadChildren: () => import('./Insured/insured.module').then( m => m.InsuredPageModule),

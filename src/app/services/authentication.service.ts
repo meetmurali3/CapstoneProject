@@ -21,29 +21,11 @@ export class AuthenticationService {
   }
  
   async loadToken() {
-    const token = await Storage.get({ key: TOKEN_KEY });    
-    if (token && token.value) {
-      console.log('set token: ', token.value);
-      this.token = token.value;
-      this.isAuthenticated.next(true);
-    } else {
-      this.isAuthenticated.next(false);
-    }
+
   }
  
   
-  login(credentials: {userName, password}): Observable<any> {
-    this.isAuthenticated.next(true);
-    return this.http.post('https://reqres.in/api/login', credentials).pipe(
-      map((data: any) => "ABC"),
-      switchMap(token => {
-        return from(Storage.set({key: TOKEN_KEY, value: "AC"}));
-      }),
-      tap(_ => {
-        this.isAuthenticated.next(true);
-      })
-    )
-  }
+
  
   logout(): Promise<void> {
     this.isAuthenticated.next(false);

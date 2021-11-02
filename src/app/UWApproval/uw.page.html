@@ -1,0 +1,67 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Underwriter Approval or Rejection</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-margin">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <!--<ion-title size="large">{{ folder }}</ion-title>-->
+    </ion-toolbar>
+  </ion-header>
+  <ion-grid class="ion-margin">
+    <ion-row>
+      <ion-col>Policy Number</ion-col>
+      <ion-col>Start Date</ion-col>
+      <ion-col>Expires on</ion-col>
+      <ion-col>Vehicle</ion-col>
+      <ion-col>Premium</ion-col>
+      <ion-col>Approve</ion-col>
+      <ion-col>Reject</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let pol of policies; let i = index">
+      <ion-col>{{pol.policyNumber}}</ion-col>
+      <ion-col>{{pol.policyStart.toString().substring(0, 10)}}</ion-col>
+      <ion-col>{{pol.policyEnd.toString().substring(0, 10)}}</ion-col>
+      <ion-col>{{getVehDetails(pol)}}</ion-col>
+      <ion-col>{{pol.premium}}</ion-col>
+      <ion-col>
+        <ion-button (click)="setUWDecision(pol, true)" color="primary" icon-start>
+          <ion-icon name="create"></ion-icon>
+          Approve
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button (click)="setUWDecision(pol, false)" color="primary" icon-start>
+          <ion-icon name="create"></ion-icon>
+          Reject
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <!--ion-list>
+      <ion-item>
+        <ion-label>Policy Number</ion-label>
+        <ion-label>Start</ion-label>
+        <ion-label>End</ion-label>
+      </ion-item>
+         <ion-item-sliding  *ngFor="let pol of policies; let i = index">
+        <ion-item>
+          <ion-label>{{pol.policyNumber}}</ion-label>
+          <ion-label>{{pol.policyStart}}</ion-label>
+          <ion-label>{{pol.policyEnd}}</ion-label>
+        </ion-item>
+        <ion-item-options>
+          
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list-->
+
+
+</ion-content>

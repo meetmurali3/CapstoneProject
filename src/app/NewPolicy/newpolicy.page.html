@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -7,33 +7,39 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-header>Basic Policy Information</ion-header>
-<ion-content>
+<ion-content color="light">
+  <ion-header>Basic Policy Information</ion-header>
   <form [formGroup]="newPolicyForm" (ngSubmit)="submitForm()" novalidate>
     <ion-item>
-      <ion-label>Insured account (please select the insured)</ion-label>
+      <ion-label position="floating">Insured (select insured)</ion-label>
       <ion-select formControlName="insuredAccount">
         <ion-select-option *ngFor="let ins of insureds" value="{{ins.id}}">{{ins.firstName + ' ' + ins.lastName}}
         </ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-item lines="full">
-      <ion-label position="floating">Policy Number</ion-label>
+    <ion-item>
+      <ion-label>Policy Number</ion-label>
       <ion-input formControlName="policyNumber" readonly></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Policy Start Date</ion-label>
-      <ion-datetime formControlName="policyStart" displayFormat="MM DD YYYY" placeholder="Select Date"></ion-datetime>
+      <ion-label>Policy Start Date</ion-label>
+      <ion-datetime style="width: 90%; text-align: left;" formControlName="policyStart" displayFormat="MM DD YYYY"
+        placeholder="Select Date"></ion-datetime>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Policy End Date</ion-label>
-      <ion-datetime formControlName="policyEnd" displayFormat="MM DD YYYY" placeholder="Select Date"></ion-datetime>
+      <ion-label>Policy End Date</ion-label>
+      <ion-datetime style="width: 90%; text-align: left;" formControlName="policyEnd" displayFormat="MM DD YYYY"
+        placeholder="Select Date"></ion-datetime>
     </ion-item>
-    <br><br><br>
+    <br>
     <ion-header>Vehicle Information</ion-header>
     <ion-item>
-      <ion-label position="floating">Year</ion-label>
-      <ion-input formControlName="year" displayFormat="YYYY" min="1900" max="2022"></ion-input>
+      <ion-label position="fixed">Year</ion-label>
+      <ion-input formControlName="year" type="number" displayFormat="YYYY" min="1900" max="2022"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">VIN</ion-label>
+      <ion-input formControlName="vin" type="text" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="fixed">Make</ion-label>
@@ -49,32 +55,46 @@
     </ion-item>
 
 
-    <br><br><br>
+    <br>
     <ion-header>Coverage Information</ion-header>
-    <ion-item><ion-label position="fixed">Bodily Injury Coverage        </ion-label>
-    <ion-checkbox formControlName="bodilyInjuryCovInd"  color="primary"></ion-checkbox></ion-item>
-    <ion-item><ion-label position="fixed">Property Damage Coverage        </ion-label>
-    <ion-checkbox formControlName="propertyDmgCovInd"  color="primary"></ion-checkbox></ion-item>
-    <ion-item><ion-label position="fixed">Medical Payments Coverage        </ion-label>
-    <ion-checkbox formControlName="medPayCovInd"  color="primary"></ion-checkbox></ion-item>
-    <ion-item><ion-label position="fixed">Collision Coverage        </ion-label>
-    <ion-checkbox formControlName="collisionCovInd"  color="primary"></ion-checkbox></ion-item>
-    <ion-item><ion-label position="fixed">Uninsured Motorist Coverage        </ion-label>
-    <ion-checkbox formControlName="unCovInd"  color="primary"></ion-checkbox></ion-item>
-    <ion-item><ion-label position="fixed">Underinsured Motorist Coverage        </ion-label>
-    <ion-checkbox formControlName="underInsCovInd"  color="primary"></ion-checkbox></ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="bodilyInjuryCovInd" color="primary"></ion-checkbox>
+      <ion-label class="coverageCheckBoxes">Bodily Injury Coverage</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="propertyDmgCovInd" color="primary"></ion-checkbox>
+      <ion-label class="coverageCheckBoxes">Property Damage Coverage</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="medPayCovInd" color="primary"></ion-checkbox>
+      <ion-label class="coverageCheckBoxes">Medical Payments Coverage</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="collisionCovInd" color="primary"></ion-checkbox>
+      <ion-label class="coverageCheckBoxes">Collision Coverage</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="unCovInd" color="primary"></ion-checkbox>
+      <ion-label class="coverageCheckBoxes">Uninsured Motorist Coverage</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="underInsCovInd" color="primary"></ion-checkbox>
+      <ion-label class="coverageCheckBoxes">Underinsured Motorist Coverage</ion-label>
+    </ion-item>
 
-    <br><br><br>
+    <br>
     <ion-header>Quote and Issue</ion-header>
     <ion-item>
-      <ion-label position="fixed">Enter the premium</ion-label>
-      <ion-input formControlName="premium" type="text" required></ion-input>
+      <ion-checkbox  formControlName="requireUWApprovalInd" color="primary"></ion-checkbox>
+      <ion-label class="coverageCheckBoxes">Want to refer this policy to Underwriter?</ion-label>
     </ion-item>
-    <ion-item><ion-label position="fixed">Do you want to refer this policy to Underwriter?</ion-label>
-      <ion-checkbox formControlName="requireUWApprovalInd"  color="primary"></ion-checkbox>
+    <ion-item>
+      <ion-label>Enter the premium</ion-label>
+      <ion-input formControlName="premium" type="number" required></ion-input>
     </ion-item>
-    <ion-button type="cancel" color="dark" (click)="this.router.navigate(['/Home/home'])">Cancel</ion-button>
-    <ion-button type="submit" color="dark">Issue</ion-button>
+    <ion-button color="primary" type="cancel" (click)="this.router.navigate(['/Home/home'])">Cancel</ion-button>
+    <ion-button color="primary" (click)="createPDF()">Generate document</ion-button>
+    <ion-button color="primary" type="submit">Issue Policy</ion-button>
 
   </form>
 </ion-content>

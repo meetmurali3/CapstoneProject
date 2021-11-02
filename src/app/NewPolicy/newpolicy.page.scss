@@ -26,3 +26,32 @@ ion-menu-button {
 #container a {
   text-decoration: none;
 }
+
+ion-input {
+  --padding-start: 8%;
+  --padding-end: 1%;
+}
+
+ion-datetime {
+  --padding-start: 5%;
+  --padding-end: 1%;
+}
+
+ion-content {
+  --padding-bottom: 10px;
+  --padding-end: 1%;
+  --padding-start: 2%;
+  --padding-top: 20px;
+}
+
+ion-select {
+  --padding-start: 2%;
+}
+
+ion-label {
+  --padding-start: 2%;
+}
+
+.coverageCheckBoxes{
+  margin-left: 1%;
+}

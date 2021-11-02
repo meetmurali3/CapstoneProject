@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -7,74 +7,69 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="light">
   <form [formGroup]="insuredForm" (ngSubmit)="submitForm()" novalidate>
-    <ion-item lines="full">
+    <ion-item >
       <ion-label position="fixed">First Name</ion-label>
-      <ion-input formControlName="firstName" type="text" required></ion-input>
+      <ion-input max="50" formControlName="firstName" type="text" required></ion-input>
     </ion-item>
 
-    
-    <ion-item lines="full">
+
+    <ion-item>
       <ion-label position="fixed">Last Name</ion-label>
       <ion-input formControlName="lastName" type="text" required></ion-input>
     </ion-item>
 
-    <ion-item lines="full">
-      <ion-label position="floating">Insured Email address</ion-label>
+    <ion-item>
+      <ion-label position="fixed">Email</ion-label>
       <ion-input formControlName="email" type="email" required></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Date of Birth</ion-label>
+      <ion-label position="fixed">Date of Birth</ion-label>
       <ion-datetime formControlName="dob" displayFormat="MM DD YYYY" placeholder="Select Date"></ion-datetime>
 
     </ion-item>
-    
 
-  <!-- Radio buttons -->
-  <ion-radio-group formControlName="gender" lines="full">
-    <ion-list-header>
-      <ion-label>Gender</ion-label>
-    </ion-list-header>
 
+    <!-- Radio buttons -->
     <ion-item>
-      <ion-label>Male</ion-label>
-      <ion-radio slot="start" value="male" checked></ion-radio>
+      <ion-label position="fixed">Gender</ion-label>
+      <ion-radio-group formControlName="gender">
+        <ion-item>
+          <ion-radio slot="start" value="Male" checked></ion-radio>
+          <ion-label position="fixed">Male</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-radio slot="start"  value="Female"></ion-radio>
+          <ion-label position="fixed">Female</ion-label>
+        </ion-item>
+      </ion-radio-group>
     </ion-item>
 
+    <br>
+    <h5>Address</h5>
     <ion-item>
-      <ion-label>Female</ion-label>
-      <ion-radio slot="start" value="female"></ion-radio>
+      <ion-label position="fixed">Line 1</ion-label>
+      <ion-input formControlName="addrLine1" type="text" required></ion-input>
     </ion-item>
-  </ion-radio-group>
-
-
-<br><br>
-<h5>Address</h5>
-  <ion-item lines="full">
-    <ion-label position="fixed">Address Line 1</ion-label>
-    <ion-input formControlName="addrLine1" type="text" required></ion-input>
-  </ion-item>
-  <ion-item lines="full">
-    <ion-label position="fixed">Address Line 2</ion-label>
-    <ion-input type="text" required></ion-input>
-  </ion-item>
-  <ion-item lines="full">
-    <ion-label position="fixed">City</ion-label>
-    <ion-input formControlName="city" type="text" required></ion-input>
-  </ion-item>
-  <ion-item lines="full">
-    <ion-label position="fixed">State</ion-label>
-    <ion-input formControlName="state" type="text" required></ion-input>
-  </ion-item>
-  <ion-item lines="full">
-    <ion-label position="fixed">Zip Code</ion-label>
-    <ion-input formControlName="zip" type="text" required></ion-input>
-  </ion-item>
-  <ion-button type="cancel" color="dark" (click)="this.router.navigate(['/Insured/insured'])">Cancel</ion-button>
-
-  <ion-button type="submit" color="dark">Create</ion-button>
-
+    <ion-item>
+      <ion-label position="fixed">Line 2</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">City</ion-label>
+      <ion-input formControlName="city" type="text" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">State</ion-label>
+      <ion-input formControlName="state" type="text" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">Zip Code</ion-label>
+      <ion-input formControlName="zip" type="number" maxLength="5" required></ion-input>
+    </ion-item>
+    <ion-button color="primary" type="cancel" (click)="this.router.navigate(['/Insured/insured'])">Cancel</ion-button>
+    <ion-button color="primary" type="submit">Create</ion-button>
   </form>
 </ion-content>

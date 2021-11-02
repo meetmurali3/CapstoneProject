@@ -1,0 +1,48 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Create User</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <form [formGroup]="userForm" (ngSubmit)="submitForm()" novalidate>
+    <ion-item>
+      <ion-label position="fixed">First Name</ion-label>
+      <ion-input formControlName="firstName" type="text" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">Last Name</ion-label>
+      <ion-input formControlName="lastName" type="text" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">User Name</ion-label>
+      <ion-input formControlName="userName" type="text" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">Password</ion-label>
+      <ion-input formControlName="password" type="text" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">Role</ion-label>
+      <ion-radio-group formControlName="roleName">
+        <ion-item>
+          <ion-radio slot="start" value="Underwriter" checked></ion-radio>
+          <ion-label position="fixed">Underwriter</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-radio slot="start" value="UWAssitant"></ion-radio>
+          <ion-label position="fixed">UWAssitant</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-radio slot="start" value="Admin"></ion-radio>
+          <ion-label position="fixed">Admin</ion-label>
+        </ion-item>
+      </ion-radio-group>
+    </ion-item>
+    <ion-button color="primary" type="cancel" (click)="this.router.navigate(['/Admin/admin'])">Cancel</ion-button>
+    <ion-button color="primary" type="submit">Create</ion-button>
+  </form>
+</ion-content>

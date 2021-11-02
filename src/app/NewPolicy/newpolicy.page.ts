@@ -4,7 +4,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Routes, RouterModule, Router } from '@angular/router';
 import { DataServiceService } from '../data-service.service';
 import { NavController } from '@ionic/angular';
-import { VariableDataService } from '../variable-data.service';
+import { AppComponent } from '../app.component';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-folder',
@@ -19,18 +22,18 @@ export class NewPolicyPage implements OnInit {
   insureds: any = [];
   policyNumber = "CAR3";
   errorMessage: string;
+  pdfObj : any;
 
   constructor(public activatedRoute: ActivatedRoute,
     public formBuilder: FormBuilder,
     public dataService: DataServiceService,
     public navControl: NavController,
-    public router: Router, public variableDataService: VariableDataService) {
+    public router: Router, public appComp: AppComponent) {
     this.getinsureds();
     this.generatePolicyNum();
     dataService.dataChanged$.subscribe((dataChanged: boolean) => {
       this.getinsureds();
     });
-
   }
 
   ionViewDidLoad() {
@@ -62,6 +65,7 @@ export class NewPolicyPage implements OnInit {
       policyEnd: new FormControl('', Validators.required),
       premium: new FormControl('', Validators.required),
       year: new FormControl('', Validators.required),
+      vin: new FormControl('', Validators.required),
       make: new FormControl('', Validators.required),
       model: new FormControl('', Validators.required),
       mileage: new FormControl('', Validators.required),
@@ -71,7 +75,8 @@ export class NewPolicyPage implements OnInit {
       collisionCovInd: new FormControl(),
       unCovInd: new FormControl(),
       underInsCovInd: new FormControl(),
-      requireUWApprovalInd: new FormControl()
+      requireUWApprovalInd: new FormControl(),
+      uID: new FormControl(this.appComp.appUserID)
     });
   }
 
@@ -99,4 +104,14 @@ export class NewPolicyPage implements OnInit {
     this.router.navigate(['/Home/Home']);
   }
 
+  createPDF(){
+    const docDefinition = {
+      content : [
+        {text: [this.newPolicyForm.get('insuredAccount').value, ' ', this.newPolicyForm.get('policyStart').value]}
+      ]
+    }
+    this.pdfObj = pdfMake.createPdf(docDefinition);
+    console.log(this.pdfObj);
+    this.pdfObj.download(); 
+  }
 }

@@ -22,7 +22,7 @@ export class InsuredPage implements OnInit {
               public formBuilder: FormBuilder,
               public dataService : DataServiceService,
               public navControl : NavController,
-              public router: Router, public variableDataService : VariableDataService) {
+              public router: Router) {
                 this.getinsureds();
                 dataService.dataChanged$.subscribe((dataChanged: boolean) => {
                   this.getinsureds();
@@ -80,6 +80,11 @@ export class InsuredPage implements OnInit {
                           error => this.errorMessage = <any>error);
   }
 
-
+  getAddressStr(ins){
+    return ins.Addresses[0].line1 + ' ' 
+            + ins.Addresses[0].city  + ' ' 
+            + ins.Addresses[0].state + ' '
+            + ins.Addresses[0].zipCode;
+  }
 
 }
