@@ -29,14 +29,18 @@ export class AppComponent {
   }
 
   getAppPages(){
+    if (this.appUserRole !== "Admin") {
       this.appPages.push({ title: 'Home', url: '/Home/home', icon: 'home' });
       this.appPages.push({ title: 'Insured Accounts', url: '/Insured/insured', icon: 'people-circle'});
       this.appPages.push({ title: 'New Policy', url: '/NewPolicy/newpolicy', icon: 'person' });
       if (this.appUserRole === "Underwriter") {
         this.appPages.push({ title: 'UW Approval', url: '/UWApproval', icon: 'checkmark' });
       }
+      this.appPages.push({ title: 'Contact Support', url: '/folder/Support', icon: 'people' });
+    } else {
       this.appPages.push({ title: 'Administration', url: '/Admin/admin', icon: 'cog' });
       this.appPages.push({ title: 'Contact Support', url: '/folder/Support', icon: 'people' });
+    }
   }
 
   logOut(){
@@ -48,6 +52,4 @@ export class AppComponent {
     this.menu.enable(false);
     this.router.navigateByUrl('', { replaceUrl: true });
   }
-
-  
 }
