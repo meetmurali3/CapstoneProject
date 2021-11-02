@@ -12,8 +12,6 @@ import { AlertController } from '@ionic/angular';
 })
 export class AdminPage implements OnInit {
   users = [];
-  uwUsers : any = [];
-  uwAssists : any = [];
   role = '';
   errorMessage : string;
   //variables such a title and items
@@ -26,13 +24,9 @@ export class AdminPage implements OnInit {
               public dataService: DataServiceService,
               public router: Router) { 
     this.getUsers();
-    this.getUnderwriterUsers();
-    this.getUWAsstUsers();
 
     dataService.dataChanged$.subscribe((dataChanged: boolean) => {
       this.getUsers();
-      this.getUnderwriterUsers();
-      this.getUWAsstUsers();
     });
     
   }
@@ -43,8 +37,6 @@ export class AdminPage implements OnInit {
   ionViewDidLoad(){
     console.log("First load");
     this.getUsers();
-    this.getUnderwriterUsers();
-    this.getUWAsstUsers();
   }
 
    /***
@@ -56,20 +48,6 @@ export class AdminPage implements OnInit {
                           a => this.users = a,
                           error => this.errorMessage = <any>error);
   }
-
-  getUnderwriterUsers () {
-    return this.dataService.getUWs().subscribe(
-                          b => this.uwUsers = b,
-                          error => this.errorMessage = <any>error);
-  }
-
-  getUWAsstUsers () {
-    return this.dataService.getUWAssits().subscribe(
-                          items => this.uwAssists = items,
-                          error => this.errorMessage = <any>error);
-  }
-
-
 
   createUser (user) {
     return this.dataService.addUser(user);

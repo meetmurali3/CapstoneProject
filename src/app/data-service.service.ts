@@ -33,19 +33,6 @@ export class DataServiceService {
       catchError(this.handleError));
   }
 
-
-  getUWs(): Observable<any> {
-    return this.httpClient.get(this.baseURL + '/api/uwusers').pipe(
-      map(this.extractData),
-      catchError(this.handleError));
-  }
-
-  getUWAssits(): Observable<any> {
-    return this.httpClient.get(this.baseURL + '/api/uwausers').pipe(
-      map(this.extractData),
-      catchError(this.handleError));
-  }
-
   getPoliciesOfUser(uid): Observable<any> {
     return this.httpClient.get(this.baseURL + '/api/policy/' + uid).pipe(
       map(this.extractData),
@@ -99,11 +86,11 @@ export class DataServiceService {
   }
 
   //Insured Account
-  getInsured(id): Observable<any> {
+/** getInsured(id): Observable<any> {
     return this.httpClient.get(this.baseURL + '/api/insuredinfo/' + id).pipe(
       map(this.extractData),
       catchError(this.handleError));
-  }
+  } */ 
 
   //Insured Account
   getInsureds(): Observable<any> {

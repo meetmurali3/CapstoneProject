@@ -58,13 +58,13 @@ export class InsuredPage implements OnInit {
     return this.insuredForm.controls;
   }
 
-
+/*
   getInsured(id){
     return this.dataService.getInsured(id).subscribe(
       items => this.insured = items,
       error => this.errorMessage = <any>error);
 
-  }
+  } */ 
 
   getDate(e) {
     let date = new Date(e.target.value).toISOString().substring(0, 10);
