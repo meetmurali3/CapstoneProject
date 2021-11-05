@@ -15,7 +15,7 @@
       <ion-col>Start Date</ion-col>
       <ion-col>Expires on</ion-col>
       <ion-col>Vehicle</ion-col>
-      <ion-col>ID Card</ion-col>
+      <ion-col>Policy Doc</ion-col>
     </ion-row>
     <ion-row *ngFor="let pol of policies; let i = index">
       <ion-col>{{pol.policyNumber}}</ion-col>
@@ -30,7 +30,6 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
   <!--ion-button (click)="sendIDCard(pol)">
             <ion-icon  slot="end" expand="block"></ion-icon>
             <ion-label>Send ID Card</ion-label>
@@ -39,6 +38,4 @@
             <ion-icon  slot="end" expand="block"></ion-icon>
             <ion-label>create PDF</ion-label>
           </ion-button-->
-
-
 </ion-content>
