@@ -15,7 +15,7 @@
       <ion-col>Start Date</ion-col>
       <ion-col>Expires on</ion-col>
       <ion-col>Vehicle</ion-col>
-      <ion-col>Policy Doc</ion-col>
+      <ion-col>Policy Doc / ID Card</ion-col>
     </ion-row>
     <ion-row *ngFor="let pol of policies; let i = index">
       <ion-col>{{pol.policyNumber}}</ion-col>
@@ -24,8 +24,11 @@
       <ion-col>{{pol.policyEnd.toString().substring(0, 10)}}</ion-col>
       <ion-col>{{getVehDetails(pol)}}</ion-col>
       <ion-col>
-        <ion-button color="primary" (click)="createPDF(pol, map.get(pol.policyNumber))">
+        <ion-button color="primary" (click)="createPolicyDoc(pol, map.get(pol.policyNumber))">
           <ion-label>Policy doc</ion-label>
+        </ion-button>        
+        <ion-button color="primary" (click)="createIDCard(pol, map.get(pol.policyNumber))">
+          <ion-label>ID Card</ion-label>
         </ion-button>
       </ion-col>
     </ion-row>
