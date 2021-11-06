@@ -9,7 +9,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
   selector: 'app-folder',
   templateUrl: './home.homepage.html',
-  styleUrls: ['../home/home.page.scss'],
+  styleUrls: ['./home/home.page.scss'],
 })
 export class HomePage implements OnInit {
   public folder: string;
