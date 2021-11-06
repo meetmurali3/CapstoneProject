@@ -114,4 +114,112 @@ export class NewPolicyPage implements OnInit {
     console.log(this.pdfObj);
     this.pdfObj.download(); 
   }
+
+
+  async createPolicyDoc() {
+    const docDefinition = {
+      content: [
+
+        {
+          image: await this.getBase64ImageFromURL("../../assets/icon/AppLogo.jpg"),
+          width: 50
+        },
+        {
+          text: '\nABC Insurance Corporation\n600 Campus Dr\nForhamPark\nNJ 07932',
+          style: 'header',
+          fontSize: 10
+        },
+        {
+          text: '\n\nPolicy Contract',
+          style: 'header',
+          fontSize: 12, bold: true, color: 'blue', alignment: 'center'
+        },
+        {
+          text: '\n\nHere are the contract details. The carrier will only cover the damages that are relevant to the below mentioned coverages.\n',
+          fontSize: 10
+        },
+        {
+          columns: [
+            {
+              text: '\nPolicy Number      : ' + this.newPolicyForm.get('policyNumber').value
+                + '\nPolicy starts on    : ' + this.newPolicyForm.get('policyStart').value.toString().substring(0, 10)
+                + '\nPolicy expires on  : ' + this.newPolicyForm.get('policyEnd').value.toString().substring(0, 10),
+              fontSize: 10, alignment: 'left'
+            },
+            {
+              text: '\nVIN        : ' + this.newPolicyForm.get('vin').value
+                + '\nMake     : ' + this.newPolicyForm.get('make').value
+                + '\nModel    : ' + this.newPolicyForm.get('model').value
+                + '\nMileage  : ' + this.newPolicyForm.get('mileage').value,
+              fontSize: 10, alignment: 'left'
+            }
+          ]
+        },
+        {
+          text: '\nBelow are the coverage details.\n',
+          fontSize: 10
+        },
+        {
+          ol: [
+            'Bodily Injury Coverage                      : ' + (this.newPolicyForm.get('bodilyInjuryCovInd').value ? ' Included' : ' Excluded'),
+            'Medical Payments Coverage           : ' + (this.newPolicyForm.get('medPayCovInd').value ? ' Included' : ' Excluded'),
+            'Property Damage Coverage             : ' + (this.newPolicyForm.get('propertyDmgCovInd').value ? ' Included' : ' Excluded'),
+            'Collision Coverage                             : ' + (this.newPolicyForm.get('collisionCovInd').value ? ' Included' : ' Excluded'),
+            'Uninsured Motorist Coverage          : ' + (this.newPolicyForm.get('unCovInd').value ? ' Included' : ' Excluded'),
+            'Underinsured Motorist Coverage    : ' + (this.newPolicyForm.get('underInsCovInd').value ? ' Included' : ' Excluded'),
+          ],
+          fontSize: 10
+        },
+        {
+          text: '\n\nTotal premium to cover the vehicle and policy is $' + this.newPolicyForm.get('premium').value,
+          fontSize: 11
+        },
+        {
+          text: '\n\nRead this policy with care.'
+            + 'This is a legal contract between the policy holder and ABC Insurance corporation.'
+            + 'In the event, the policy holder needs to contact someone about the policy he / she '
+            + 'can contact the insurance agent. Or for any additional questions we can be reached at '
+            + 'mgarapat1@live.maryville.edu',
+          fontSize: 9
+        },
+        {
+          text: '\n\n\nMuralidhar Garapati',
+          fontSize: 10, alignment: 'right'
+        },
+        {
+          text: 'Vice President',
+          fontSize: 10, bold: true, alignment: 'right'
+        },
+      ]
+    }
+    this.pdfObj = pdfMake.createPdf(docDefinition);
+    console.log(this.pdfObj);
+    this.pdfObj.download();
+  }
+
+  getBase64ImageFromURL(url) {
+    return new Promise((resolve, reject) => {
+      var img = new Image();
+      img.setAttribute("crossOrigin", "anonymous");
+
+      img.onload = () => {
+        var canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+
+        var dataURL = canvas.toDataURL("image/png");
+
+        resolve(dataURL);
+      };
+
+      img.onerror = error => {
+        reject(error);
+      };
+
+      img.src = url;
+    });
+  }  
 }
