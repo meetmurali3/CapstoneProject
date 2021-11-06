@@ -72,7 +72,6 @@ export class EmailService {
       + 'Vehicle Model\t: '+ policy.Vehicles[0].model + '\n'
       + 'Insured\t: '+ insured.firstName + '\n'
       + '===================cut here========================\n',
-      //url: 'http://ionicframework.com/',
       dialogTitle: 'ID Card for Policy',
     });
   }
