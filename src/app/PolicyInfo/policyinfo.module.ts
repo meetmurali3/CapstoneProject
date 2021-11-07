@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { PolicyInfoPageRoutingModule } from './policyinfo-routing.module';
 
 import { PolicyInfoPage } from './policyinfo.page';
-import { VariableDataService } from '../variable-data.service';
 import { NewPolicyPage } from '../NewPolicy/newpolicy.page';
 
 @NgModule({
@@ -19,6 +18,6 @@ import { NewPolicyPage } from '../NewPolicy/newpolicy.page';
     ReactiveFormsModule
   ],
   declarations: [PolicyInfoPage],
-  providers: [VariableDataService, NewPolicyPage]
+  providers: [NewPolicyPage]
 })
 export class PolicyInfoPageModule {}

@@ -17,38 +17,59 @@
         </ion-select-option>
       </ion-select>
     </ion-item>
+    <span class="validation-errors" *ngIf="isSubmitted && errorControl.insuredAccount.errors?.required">
+      Insured is required.
+    </span>
     <ion-item>
       <ion-label>Policy Number</ion-label>
       <ion-input formControlName="policyNumber" readonly></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Policy Start Date</ion-label>
-      <ion-datetime style="width: 90%; text-align: left;" formControlName="policyStart" displayFormat="MM DD YYYY"
-        placeholder="Select Date"></ion-datetime>
+      <ion-label position="stacked">Start Date</ion-label>
+      <ion-datetime max="2099-10-31" formControlName="policyStart" displayFormat="MM DD YYYY" placeholder="Select Date">
+      </ion-datetime>
     </ion-item>
+    <span class="validation-errors" *ngIf="isSubmitted && errorControl.policyStart.errors?.required">
+      Start Date is required.
+    </span>
     <ion-item>
-      <ion-label>Policy End Date</ion-label>
-      <ion-datetime style="width: 90%; text-align: left;" formControlName="policyEnd" displayFormat="MM DD YYYY"
-        placeholder="Select Date"></ion-datetime>
+      <ion-label position="stacked">End Date</ion-label>
+      <ion-datetime max="2099-10-31" formControlName="policyEnd" displayFormat="MM DD YYYY" placeholder="Select Date">
+      </ion-datetime>
     </ion-item>
+    <span class="validation-errors" *ngIf="isSubmitted && errorControl.policyEnd.errors?.required">
+      End Date is required.
+    </span>
     <br>
     <ion-header>Vehicle Information</ion-header>
     <ion-item>
       <ion-label position="fixed">Year</ion-label>
       <ion-input formControlName="year" type="number" displayFormat="YYYY" min="1900" max="2022"></ion-input>
     </ion-item>
+    <span class="validation-errors" *ngIf="isSubmitted && errorControl.year.errors?.required">
+      Veh year is required.
+    </span>
     <ion-item>
       <ion-label position="fixed">VIN</ion-label>
       <ion-input formControlName="vin" type="text" required></ion-input>
     </ion-item>
+    <span class="validation-errors" *ngIf="isSubmitted && errorControl.vin.errors?.required">
+      Veh VIN is required.
+    </span>
     <ion-item>
       <ion-label position="fixed">Make</ion-label>
       <ion-input formControlName="make" type="text" required></ion-input>
     </ion-item>
+    <span class="validation-errors" *ngIf="isSubmitted && errorControl.make.errors?.required">
+      Veh make is required.
+    </span>
     <ion-item>
       <ion-label position="fixed">Model</ion-label>
       <ion-input formControlName="model" type="text" required></ion-input>
     </ion-item>
+    <span class="validation-errors" *ngIf="isSubmitted && errorControl.model.errors?.required">
+      Veh model is required.
+    </span>
     <ion-item>
       <ion-label position="fixed">Mileage</ion-label>
       <ion-input formControlName="mileage" type="text" required></ion-input>
@@ -85,15 +106,23 @@
     <br>
     <ion-header>Quote and Issue</ion-header>
     <ion-item>
-      <ion-checkbox  formControlName="requireUWApprovalInd" color="primary"></ion-checkbox>
-      <ion-label class="coverageCheckBoxes">Want to refer this policy to Underwriter?</ion-label>
+      <ion-checkbox formControlName="requireUWApprovalInd" color="primary"></ion-checkbox>
+      <ion-label class="coverageCheckBoxes">Select to refer this policy to Underwriter</ion-label>
     </ion-item>
+
+    <br>
     <ion-item>
-      <ion-label>Enter the premium</ion-label>
+      <ion-label style="font-weight: bold;">Enter the premium</ion-label>
       <ion-input formControlName="premium" type="number" required></ion-input>
     </ion-item>
+    <span class="validation-errors" *ngIf="isSubmitted && errorControl.premium.errors?.required">
+      Premium is required.
+    </span>
+
+    <br>
+    <br>
     <ion-button color="primary" type="cancel" (click)="this.router.navigate(['/Home/home'])">Cancel</ion-button>
-    <ion-button color="primary" (click)="createPolicyDoc()">Generate document</ion-button>
+    <ion-button color="primary" (click)="createPolicyDoc()">Preview document</ion-button>
     <ion-button color="primary" type="submit">Issue Policy</ion-button>
 
   </form>

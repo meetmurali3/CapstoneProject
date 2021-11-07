@@ -7,7 +7,6 @@ import { NavController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { NewPolicyPage } from '../NewPolicy/newpolicy.page';
-import { VariableDataService } from '../variable-data.service';
 @Component({
   selector: 'app-folder',
   templateUrl: './policyinfo.page.html',
@@ -23,8 +22,7 @@ export class PolicyInfoPage implements OnInit {
               public formBuilder: FormBuilder,
               public dataService : DataServiceService,
               public navControl : NavController,
-              private router: Router, private newPolPage: NewPolicyPage,
-              public variableDataService : VariableDataService) {
+              private router: Router, private newPolPage: NewPolicyPage) {
                 this.activatedRoute.queryParams.subscribe((res)=>{
                   console.log(res);
               });
@@ -70,7 +68,6 @@ export class PolicyInfoPage implements OnInit {
 
   goBack() {
     console.log("click of back on policyinfo");
-    console.log(this.variableDataService);
     this.router.navigate(['/NewPolicy/newpolicy'])
 
   }

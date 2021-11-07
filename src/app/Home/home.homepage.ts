@@ -37,8 +37,19 @@ export class HomePage implements OnInit {
     this.getPolicies();
   }
 
-  /***
+   /**
+    * This function returns the vehicle details in string format
+    */
+    getVehDetails(policy) {
+      return policy.Vehicles[0].year + ' '
+        + policy.Vehicles[0].make + ' '
+        + policy.Vehicles[0].model;
+    }
+    
+/***
   * This function returns the list of policies of the logged in user
+  * It calls the service layer endpoint through the dataservice 
+  * to get list of policies created by the logged-in user
   */
   getPolicies() {
     return this.dataService.getPoliciesOfUser(this.appComp.appUserID).subscribe(
@@ -53,18 +64,7 @@ export class HomePage implements OnInit {
   }
 
   /***
-* This function returns the list of policies of the logged in user
-*/
-  populateData() {
-    console.log("in ");
-    console.log(this.policies);
-    for (let pol in this.policies) {
-      console.log("policy - ", pol);
-    }
-  }
-
-  /***
-  * This function returns the list of policies of the logged in user
+  * This function returns insured of each policy created by the logged in user
   */
   getInsuredOfPolicy(accountID, policyNumber) {
     return this.dataService.getInsuredOfPolicy(accountID).subscribe(
@@ -75,15 +75,9 @@ export class HomePage implements OnInit {
       error => this.errorMessage = <any>error);
   }
 
-  /**
-    * This function returns the vehicle details in string format
-    */
-  getVehDetails(policy) {
-    return policy.Vehicles[0].year + ' '
-      + policy.Vehicles[0].make + ' '
-      + policy.Vehicles[0].model;
-  }
-
+  /***
+  * This function is used to send ID card email.
+  */
   sendIDCard(policy) {
     let to = 'mgarapati1@live.maryville.edu';
     let cc = '';
@@ -96,6 +90,9 @@ export class HomePage implements OnInit {
     this.emailService.sendIDCardUsingPWA(policy, this.map.get(policy.policyNumber));
   }
 
+/***
+  * This function used PDFMake feature and generated policy contract document.
+  */
   async createPolicyDoc(policy, ins) {
     const docDefinition = {
       content: [
@@ -177,6 +174,9 @@ export class HomePage implements OnInit {
     this.pdfObj.download();
   }
 
+  /***
+  * This function used PDFMake feature and generated insurance ID card in PDF format.
+  */
   async createIDCard(policy, ins) {
     const docDefinition = {
       content: [
@@ -308,6 +308,10 @@ export class HomePage implements OnInit {
     return ins.firstName + ' ' + ins.lastName;
   }
 
+  /**
+   * This function is used to convert the application logo 
+   * to readable format of PDFMake to print it on the ID card or Policy contract document
+   */
   getBase64ImageFromURL(url) {
     return new Promise((resolve, reject) => {
       var img = new Image();

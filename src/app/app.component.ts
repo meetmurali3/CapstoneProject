@@ -28,6 +28,10 @@ export class AppComponent {
     this.navCtrl.navigateRoot('/NewPolicy/newpolicy');
   }
 
+  /**
+   * This function dynamically generates the 
+   * left hand side menu links for each logged-in user based on their role
+   */
   getAppPages(){
     if (this.appUserRole !== "Admin") {
       this.appPages.push({ title: 'Home', url: '/Home/home', icon: 'home' });
@@ -43,6 +47,9 @@ export class AppComponent {
     }
   }
 
+  /**
+   * This function logs out the user
+   */
   logOut(){
     console.log("Logging out");
     this.appUserID = null;

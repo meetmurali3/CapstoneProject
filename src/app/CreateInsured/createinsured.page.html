@@ -13,24 +13,31 @@
       <ion-label position="fixed">First Name</ion-label>
       <ion-input max="50" formControlName="firstName" type="text" required></ion-input>
     </ion-item>
-
+    <span class="validation-errors" *ngIf="isSubmitted && errorControl.firstName.errors?.required">
+      First name is required.
+    </span>
 
     <ion-item>
       <ion-label position="fixed">Last Name</ion-label>
       <ion-input formControlName="lastName" type="text" required></ion-input>
     </ion-item>
-
+    <span class="validation-errors" *ngIf="isSubmitted && errorControl.lastName.errors?.required">
+      Last name is required.
+    </span>
     <ion-item>
       <ion-label position="fixed">Email</ion-label>
       <ion-input formControlName="email" type="email" required></ion-input>
     </ion-item>
-
+    <span class="validation-errors" *ngIf="isSubmitted && errorControl.email.errors?.required">
+      Email is required.
+    </span>
     <ion-item>
       <ion-label position="fixed">Date of Birth</ion-label>
       <ion-datetime formControlName="dob" displayFormat="MM DD YYYY" placeholder="Select Date"></ion-datetime>
-
     </ion-item>
-
+    <span class="validation-errors" *ngIf="isSubmitted && errorControl.dob.errors?.required">
+      DOB is required.
+    </span>
 
     <!-- Radio buttons -->
     <ion-item>
@@ -53,6 +60,9 @@
       <ion-label position="fixed">Line 1</ion-label>
       <ion-input formControlName="addrLine1" type="text" required></ion-input>
     </ion-item>
+    <span class="validation-errors" *ngIf="isSubmitted && errorControl.addrLine1.errors?.required">
+      Line1 is required.
+    </span> 
     <ion-item>
       <ion-label position="fixed">Line 2</ion-label>
       <ion-input type="text" required></ion-input>
@@ -61,14 +71,25 @@
       <ion-label position="fixed">City</ion-label>
       <ion-input formControlName="city" type="text" required></ion-input>
     </ion-item>
+    <span class="validation-errors" *ngIf="isSubmitted && errorControl.city.errors?.required">
+      City is required.
+    </span>     
     <ion-item>
       <ion-label position="fixed">State</ion-label>
       <ion-input formControlName="state" type="text" required></ion-input>
     </ion-item>
+    <span class="validation-errors" *ngIf="isSubmitted && errorControl.state.errors?.required">
+      State is required.
+    </span>      
     <ion-item>
       <ion-label position="fixed">Zip Code</ion-label>
       <ion-input formControlName="zip" type="number" maxLength="5" required></ion-input>
     </ion-item>
+    <span class="validation-errors" *ngIf="isSubmitted && errorControl.zip.errors?.required">
+      Zip code is required.
+    </span>   
+    
+    <br>
     <ion-button color="primary" type="cancel" (click)="this.router.navigate(['/Insured/insured'])">Cancel</ion-button>
     <ion-button color="primary" type="submit">Create</ion-button>
   </form>

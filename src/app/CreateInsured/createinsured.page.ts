@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Routes, RouterModule, Router } from '@angular/router';
 import { DataServiceService } from '../data-service.service';
 import { NavController } from '@ionic/angular';
-import { VariableDataService } from '../variable-data.service';
 @Component({
   selector: 'app-folder',
   templateUrl: './createinsured.page.html',
@@ -34,7 +33,6 @@ export class CreateInsuredPage implements OnInit {
     this.getinsureds();
   }
 
-
   ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id');
     this.insuredForm = this.formBuilder.group({
@@ -44,34 +42,33 @@ export class CreateInsuredPage implements OnInit {
       email: new FormControl('', Validators.required),
       gender: new FormControl('', Validators.required),
       addrLine1: new FormControl('', Validators.required),
-      //addrLine2: new FormControl(),
       city: new FormControl('', Validators.required),
       state: new FormControl('', Validators.required),
       zip: new FormControl('', Validators.required),
     })
-
-
   }
 
   get errorControl() {
     return this.insuredForm.controls;
   }
 
-  getDate(e) {
-    let date = new Date(e.target.value).toISOString().substring(0, 10);
-    this.insuredForm.get('dob').setValue(date, {
-      onlyself: true
-    });
-  }
 
-
+  /***
+    * This gets the list of insureds present in the application.
+    * This calls dataservice getInsureds()
+    */
   getinsureds() {
     return this.dataService.getInsureds().subscribe(
       b => this.insureds = b,
       error => this.errorMessage = <any>error);
   }
 
-
+  /***
+    * This form submission function checks if all the required fields are filled.
+    * If there are no validations the it calls ths dataservice (that calls the service layer endpoint)
+    * to create new insured.
+    * This calls dataservice addInsured()
+    */
   submitForm() {
     this.isSubmitted = true;
     if (!this.insuredForm.valid) {

@@ -25,8 +25,8 @@ export class LoginPage implements OnInit {
     private httpClient: HttpClient,
     private router: Router,
     private loadingController: LoadingController,
-    public appComponent : AppComponent,
-    private menu : MenuController) { }
+    public appComponent: AppComponent,
+    private menu: MenuController) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -38,6 +38,9 @@ export class LoginPage implements OnInit {
     return this.loginForm.controls;
   }
 
+  /**
+   * This function presents alert if login failed
+   */
   presentAlert() {
     this.alertController.create({
       header: 'Login Failed.',
@@ -48,6 +51,9 @@ export class LoginPage implements OnInit {
     });
   }
 
+  /**
+  * This is the login function that authenticates login credentials
+  */
   login() {
     this.isSubmitted = true;
     if (!this.loginForm.valid) {
@@ -61,7 +67,7 @@ export class LoginPage implements OnInit {
           this.menu.enable(true);
           console.log(`${this.data.id}`);
           this.appComponent.appUserID = `${this.data.id}`;
-          this.appComponent.appUserRole=`${this.data.roleName}`;
+          this.appComponent.appUserRole = `${this.data.roleName}`;
           console.log(this.appComponent.appUserID);
           console.log(this.appComponent.appUserRole);
           this.appComponent.appUserName = this.loginForm.get('login').value;

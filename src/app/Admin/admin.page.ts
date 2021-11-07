@@ -49,6 +49,10 @@ export class AdminPage implements OnInit {
                           error => this.errorMessage = <any>error);
   }
 
+ /***
+   * This function take the data of the new user and calls the dataservice to add new user
+   * This calls dataservice addUser()
+   */
   createUser (user) {
     return this.dataService.addUser(user);
   }

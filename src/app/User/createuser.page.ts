@@ -13,6 +13,7 @@ export class CreateUserPage implements OnInit {
   public folder: string;
   public userForm: FormGroup;
   errorMessage: string;
+  isSubmitted = false;
 
   constructor(public activatedRoute: ActivatedRoute,
     public formBuilder: FormBuilder,
@@ -39,7 +40,14 @@ export class CreateUserPage implements OnInit {
     return this.userForm.controls;
   }
 
+  /***
+  * This form submission function checks if all the required fields are filled.
+  * If there are no validations the it calls the dataservice (that calls the service layer endpoint)
+  * to create new user.
+  * This calls dataservice addUser()
+  */
   submitForm() {
+    this.isSubmitted = true;
     if (!this.userForm.valid) {
       console.log('Please provide all the required values!')
       return false;

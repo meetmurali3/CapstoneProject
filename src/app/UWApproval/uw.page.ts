@@ -6,7 +6,7 @@ import { DataServiceService } from '../data-service.service';
 @Component({
   selector: 'app-folder',
   templateUrl: './uw.page.html',
-  styleUrls: ['../UWApproval/uw.page.scss'],
+  styleUrls: ['./uw.page.scss'],
 })
 export class UWPage implements OnInit {
   public folder: string;
@@ -41,6 +41,11 @@ export class UWPage implements OnInit {
       error => this.errorMessage = <any>error);
   }
 
+  /***
+* This function allows underwriter to record his/her decision on the policy.
+* If Underwriter feels it is too risky for the carrier to insure the policy he/she may reject the policy.
+* Calls the service layer to update the policy record.
+*/
   setUWDecision(policy, decision) {
     policy['isUWApprovedInd'] = decision;
     console.log(policy);

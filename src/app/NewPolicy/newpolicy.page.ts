@@ -3,7 +3,7 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router';
 import { Routes, RouterModule, Router } from '@angular/router';
 import { DataServiceService } from '../data-service.service';
-import { NavController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 import { AppComponent } from '../app.component';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -22,13 +22,13 @@ export class NewPolicyPage implements OnInit {
   insureds: any = [];
   policyNumber = "CAR3";
   errorMessage: string;
-  pdfObj : any;
+  pdfObj: any;
 
   constructor(public activatedRoute: ActivatedRoute,
     public formBuilder: FormBuilder,
     public dataService: DataServiceService,
     public navControl: NavController,
-    public router: Router, public appComp: AppComponent) {
+    public router: Router, public appComp: AppComponent, public toastControl: ToastController) {
     this.getinsureds();
     this.generatePolicyNum();
     dataService.dataChanged$.subscribe((dataChanged: boolean) => {
@@ -50,10 +50,7 @@ export class NewPolicyPage implements OnInit {
       var ranNumber = Math.floor(Math.random() * 100000);
       console.log(ranNumber);
       this.policyNumber = this.policyNumber + ranNumber;
-
-      console.log(this.policyNumber);
     }
-    console.log(this.policyNumber);
   }
 
   ngOnInit() {
@@ -84,13 +81,21 @@ export class NewPolicyPage implements OnInit {
     return this.newPolicyForm.controls;
   }
 
-
+  /**
+   * This function returns insureds present in the application
+   */
   getinsureds() {
     return this.dataService.getInsureds().subscribe(
       b => this.insureds = b,
       error => this.errorMessage = <any>error);
   }
 
+  /***
+    * This form submission function checks if all the required fields are filled.
+    * If there are no validations the it calls the dataservice (that calls the service layer endpoint)
+    * to create new policy.
+    * This calls dataservice addPolicy()
+    */
   submitForm() {
     this.isSubmitted = true;
     console.log(this.newPolicyForm.value);
@@ -104,18 +109,9 @@ export class NewPolicyPage implements OnInit {
     this.router.navigate(['/Home/Home']);
   }
 
-  createPDF(){
-    const docDefinition = {
-      content : [
-        {text: [this.newPolicyForm.get('insuredAccount').value, ' ', this.newPolicyForm.get('policyStart').value]}
-      ]
-    }
-    this.pdfObj = pdfMake.createPdf(docDefinition);
-    console.log(this.pdfObj);
-    this.pdfObj.download(); 
-  }
-
-
+  /***
+  * This function used PDFMake feature and generates preview policy document in PDF format.
+  */
   async createPolicyDoc() {
     const docDefinition = {
       content: [
@@ -197,6 +193,10 @@ export class NewPolicyPage implements OnInit {
     this.pdfObj.download();
   }
 
+  /**
+ * This function is used to convert the application logo 
+ * to readable format of PDFMake to print it on the preview policy contract document.
+ */
   getBase64ImageFromURL(url) {
     return new Promise((resolve, reject) => {
       var img = new Image();
@@ -221,5 +221,5 @@ export class NewPolicyPage implements OnInit {
 
       img.src = url;
     });
-  }  
+  }
 }
