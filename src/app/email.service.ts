@@ -47,20 +47,12 @@ export class EmailService {
 
   }
 
-  sendEmailUsingPWA(){
-    Share.share({
-      title: 'See cool stuff',
-      text: 'Really awesome thing you need to see right meow',
-      url: 'http://ionicframework.com/',
-      dialogTitle: 'Share with buddies',
-    });
-  }
-
   sendIDCardUsingPWA(policy, insured){
     Share.share({
+      
       title: 'ID Card',
       text: 'Here is your ID card \n'
-      + 'Please print, cut and use these card.\n'
+      + 'Please print, cut and use this card till the time you receive our mail.\n'
       + '\n \n'
       + '===================cut here========================\n'
       + 'Policy Number\t\t: '+ policy.policyNumber + '\n'

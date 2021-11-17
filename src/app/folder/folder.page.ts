@@ -32,7 +32,7 @@ export class FolderPage implements OnInit {
     let subject = "Please help";
     let body = "";
     //this.emailService.sendEmail(to, cc, bcc, attachment, subject, body);
-    this.emailService.sendEmailUsingPWA();
+    //this.emailService.sendEmailUsingPWA();
   }
   
   generatePDF(){

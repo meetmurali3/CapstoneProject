@@ -78,15 +78,7 @@ export class HomePage implements OnInit {
   /***
   * This function is used to send ID card email.
   */
-  sendIDCard(policy) {
-    let to = 'mgarapati1@live.maryville.edu';
-    let cc = '';
-    let bcc = '';
-    let attachment = '';
-    let subject = "Please help";
-    let body = "";
-    //this.emailService.sendEmail(to, cc, bcc, attachment, subject, body);
-    //this.getInsuredOfPolicy(policy.InsuredAccountId);
+   sendIDCard(policy) {
     this.emailService.sendIDCardUsingPWA(policy, this.map.get(policy.policyNumber));
   }
 
