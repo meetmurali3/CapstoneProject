@@ -7,7 +7,7 @@ import { Share } from '@capacitor/share';
 })
 export class EmailService {
 
-  constructor(private emailComposer: EmailComposer ) { }
+  constructor(private emailComposer: EmailComposer ) {  }
 
   /**
     *
